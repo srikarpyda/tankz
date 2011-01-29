@@ -4,5 +4,6 @@ public enum TankzTileState {
 	EMPTY,
 	BLOCKED,
 	TANK_START,
-	POWERUP
+	POWERUP,
+	DYNAMIC_TILE
 }

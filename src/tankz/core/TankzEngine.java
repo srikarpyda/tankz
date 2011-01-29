@@ -56,6 +56,11 @@ public class TankzEngine extends Thread {
 			for(int y = 1; y < grid.getGridSize(); y+=2){
 				grid.setState(x, y, state);
 			}
-		}		
+		}
+		grid.setState(0, 0, TankzTileState.TANK_START);
+		grid.setState(0, 8, TankzTileState.TANK_START);
+		grid.setState(8, 0, TankzTileState.TANK_START);
+		grid.setState(8, 8, TankzTileState.TANK_START);
+		grid.setState(5, 5, TankzTileState.POWERUP);
 	}
 }
