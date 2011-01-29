@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -24,11 +25,14 @@ public class TankzMainMenu extends JFrame implements ActionListener {
 		
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(getClass().getResource("/images/tank.png"));
+			image = ImageIO.read(new File("/images/tank.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		setIconImage(image);
+		if(image != null) {
+			setIconImage(image);
+		}
+		
 		
 		pane = new JPanel();
 		pane.setPreferredSize(new Dimension(300,200));
