@@ -1,15 +1,25 @@
 package tankz.core;
 
+import java.io.File;
+
 import tankz.ui.TankGameUI;
 
 public class TankzEngine extends Thread {
 	
-	public TankGameUI ui;
+	public static TankGameUI ui;
+	public static TankzGrid grid;
 	private boolean isRunning = true;
 	private boolean isPaused = false;
 	
 	public TankzEngine() {
-		ui = new TankGameUI();
+		super("GameEngine");
+		grid = new TankzGrid(9);
+		this.setupGrid();
+		ui = new TankGameUI();	
+	}
+	
+	public TankzEngine(File file){
+		//TODO generate code for this
 	}
 	
 	public void run() {
@@ -38,5 +48,14 @@ public class TankzEngine extends Thread {
 	private void iterateLogic() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private void setupGrid(){
+		TankzTileState state = TankzTileState.BLOCKED;
+		for(int x = 1; x < grid.getGridSize(); x+=2){
+			for(int y = 1; y < grid.getGridSize(); y+=2){
+				grid.setState(x, y, state);
+			}
+		}		
 	}
 }
