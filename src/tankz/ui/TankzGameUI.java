@@ -21,6 +21,7 @@ public class TankzGameUI extends JFrame {
 		
 		
 		pack();
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Need to make this load the game menu or something!!
 		setVisible(true);
 	}
