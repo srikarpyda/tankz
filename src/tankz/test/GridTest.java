@@ -10,7 +10,7 @@ public class GridTest {
 	public static void main(String[] args) {
 		TankzEngine main = new TankzEngine();
 		main.start();
-		System.out.println(main.grid.toString());
+		System.out.println(TankzEngine.grid.toString());
 	}
 	
 }
