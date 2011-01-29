@@ -68,6 +68,7 @@ public class TankzMainMenu extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == newGame) {
 			new TankzEngine().start();
+			dispose();
 		}else if (e.getSource() == options) {
 			
 		}else if(e.getSource() == help) {
