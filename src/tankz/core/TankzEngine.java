@@ -28,7 +28,7 @@ public class TankzEngine extends Thread {
 				ui.repaint();
 				iterateLogic();
 				try {
-					sleep(10);
+					sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -46,8 +46,17 @@ public class TankzEngine extends Thread {
 	}
 	
 	private void iterateLogic() {
-		// TODO Auto-generated method stub
-		
+		switch (grid.getState(4, 4)){
+			case BLOCKED:
+				grid.setState(4, 4, TankzTileState.EMPTY);
+				break;
+			case EMPTY:
+				grid.setState(4, 4, TankzTileState.BLOCKED);
+				break;
+			default:
+				break;
+		}
+		System.out.println(grid.toString());
 	}
 	
 	private void setupGrid(){
@@ -61,6 +70,6 @@ public class TankzEngine extends Thread {
 		grid.setState(0, 8, TankzTileState.TANK_START);
 		grid.setState(8, 0, TankzTileState.TANK_START);
 		grid.setState(8, 8, TankzTileState.TANK_START);
-		grid.setState(5, 5, TankzTileState.POWERUP);
+		//grid.setState(4, 4, TankzTileState.POWERUP);
 	}
 }
