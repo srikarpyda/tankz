@@ -34,20 +34,21 @@ public class TankzPanel extends Panel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D)g;
-		for (int x = 0; x < TankzEngine.grid.getGridSize(); x++) {
-			for (int y = 0; y < TankzEngine.grid.getGridSize(); y++) {
-				switch (TankzEngine.grid.getState(x, y)) {
-				case BLOCKED:
-					g2.drawImage(block,x*16,y*16,null);
-					break;
-				default:
-					g2.drawImage(empty,x*16,y*16,null);
-					break;
-				}
-			}
-		}
+		paintBase(g2);
+		paintActiveLayer(g2);
+		paintOverlayLayer(g2);
 		
 	}
+	private void paintOverlayLayer(Graphics2D g2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void paintActiveLayer(Graphics2D g2) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void paintBase(Graphics2D g2) {
 		for (int x = 0; x < TankzEngine.grid.getGridSize(); x++) {
 			for (int y = 0; y < TankzEngine.grid.getGridSize(); y++) {
