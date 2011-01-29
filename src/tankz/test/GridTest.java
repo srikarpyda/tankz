@@ -15,5 +15,5 @@ public class GridTest {
 		grid.setState(7, 7, TankzTileState.BLOCKED);
 		System.out.println(grid.toString());
 	}
-
+	
 }

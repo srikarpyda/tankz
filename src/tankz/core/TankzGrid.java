@@ -25,12 +25,22 @@ public class TankzGrid {
 		StringBuilder builder = new StringBuilder();
 		for(Vector<TankzTile> row : grid){
 			for(TankzTile tile : row){
-				if(tile.getState().equals(TankzTileState.EMPTY)){
+				switch (tile.getState()) {
+				case EMPTY:
 					builder.append(0);
-				}else if(tile.getState().equals(TankzTileState.BLOCKED)){
+					break;
+				case BLOCKED:
 					builder.append(1);
-				}else{
+					break;
+				case TANK_START:
+					builder.append(2);
+					break;
+				case POWERUP:
+					builder.append(3);
+					break;
+				default:
 					builder.append(tile.getState());
+					break;
 				}
 			}
 			builder.append("\n");
