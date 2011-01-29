@@ -46,17 +46,7 @@ public class TankzEngine extends Thread {
 	}
 	
 	private void iterateLogic() {
-		switch (grid.getState(4, 4)){
-			case BLOCKED:
-				grid.setState(4, 4, TankzTileState.EMPTY);
-				break;
-			case EMPTY:
-				grid.setState(4, 4, TankzTileState.BLOCKED);
-				break;
-			default:
-				break;
-		}
-		System.out.println(grid.toString());
+		//TODO game logic
 	}
 	
 	private void setupGrid(){
@@ -70,6 +60,6 @@ public class TankzEngine extends Thread {
 		grid.setState(0, 8, TankzTileState.TANK_START);
 		grid.setState(8, 0, TankzTileState.TANK_START);
 		grid.setState(8, 8, TankzTileState.TANK_START);
-		//grid.setState(4, 4, TankzTileState.POWERUP);
+		grid.setState(4, 4, TankzTileState.POWERUP);
 	}
 }
