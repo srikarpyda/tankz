@@ -25,7 +25,7 @@ public class TankzEngine extends Thread {
 	public void run() {
 		while(isRunning){
 			while(!isPaused){
-				ui.repaint();
+				ui.repaintGame();
 				iterateLogic();
 				try {
 					sleep(1000);
