@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import tankz.core.TankzEngine;
+
 public class TankzMainMenu extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = 1778972834916181412L; 
@@ -65,7 +67,7 @@ public class TankzMainMenu extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == newGame) {
-			
+			new TankzEngine();
 		}else if (e.getSource() == options) {
 			
 		}else if(e.getSource() == help) {

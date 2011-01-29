@@ -15,7 +15,10 @@ public class TankzGameUI extends JFrame {
 		super("Tankz");
 		
 		pane = new TankzPanel();
-		pane.setPreferredSize(new Dimension(TankzEngine.grid.getGridSize(),TankzEngine.grid.getGridSize()));
+		pane.setPreferredSize(new Dimension(TankzEngine.grid.getGridSize()*16,TankzEngine.grid.getGridSize()*16));
+		add(pane);
+		setResizable(false);
+		
 		
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Need to make this load the game menu or something!!
