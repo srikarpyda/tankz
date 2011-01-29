@@ -6,9 +6,7 @@ public class TankzGrid {
 
 	private Vector<Vector<TankzTile>> grid;
 	
-	
 	public TankzGrid(int size){
-		
 		Vector<TankzTile> row;
 		grid = new Vector<Vector<TankzTile>>();
 		for(int x = 0; x < size; x++){
@@ -56,4 +54,7 @@ public class TankzGrid {
 		return this.grid.get(x).get(y).getState();
 	}
 	
+	public int getGridSize(){
+		return this.grid.size();
+	}
 }
