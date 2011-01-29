@@ -25,7 +25,7 @@ public class TankzMainMenu extends JFrame implements ActionListener {
 		
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(new File("/images/tank.png"));
+			image = ImageIO.read(new File("images/tank.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
