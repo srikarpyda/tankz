@@ -2,11 +2,11 @@ package tankz.core;
 
 import java.io.File;
 
-import tankz.ui.TankGameUI;
+import tankz.ui.TankzGameUI;
 
 public class TankzEngine extends Thread {
 	
-	public static TankGameUI ui;
+	public static TankzGameUI ui;
 	public static TankzGrid grid;
 	private boolean isRunning = true;
 	private boolean isPaused = false;
@@ -15,7 +15,7 @@ public class TankzEngine extends Thread {
 		super("GameEngine");
 		grid = new TankzGrid(9);
 		this.setupGrid();
-		ui = new TankGameUI();	
+		ui = new TankzGameUI();	
 	}
 	
 	public TankzEngine(File file){
