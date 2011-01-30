@@ -25,7 +25,6 @@ public class Tank extends ActiveObject {
 			System.exit(1);
 		}
 	}
-
 	public Image getImage() {
 		switch (this.getDirection()){
 		case NORTH:
@@ -40,8 +39,7 @@ public class Tank extends ActiveObject {
 			return null;
 		}
 		
-	}
-	
+	}	
 	public void action(){
 		if(this.getVelocity() > 0){
 			switch (this.getDirection()){
@@ -61,8 +59,5 @@ public class Tank extends ActiveObject {
 				break;
 			}
 		}
-	}
-	
-	
-	
+	}	
 }
