@@ -40,7 +40,6 @@ public class TankzPanel extends Panel {
 	}
 	
 	public void paint(Graphics g) {
-		//super.paint(g);
 		if(buffered) {
 			Graphics2D g2 = (Graphics2D)buffer2.getGraphics();
 			g.drawImage(buffer1,0,0,null);
