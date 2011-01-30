@@ -32,7 +32,14 @@ public class TankzEngine extends Thread implements KeyListener{
 	public void run() {
 		while(isRunning){
 			while(!isPaused){
-				ui.repaintGame();
+				boolean repaint = true;
+				if(repaint) {
+					ui.repaintGame();
+					repaint = false;
+				}else {
+					repaint = true;
+				}
+				
 				iterateLogic();
 				try {
 					sleep(10);

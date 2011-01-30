@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Panel;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
@@ -19,8 +20,14 @@ public class TankzPanel extends Panel {
 	private Image block;	
 	private Image empty;
 	
+	private Image buffer1;
+	private Image buffer2;
+	private boolean buffered = true;
+	
 	public TankzPanel() {
 		block = null;
+		buffer1 = new BufferedImage(TankzEngine.grid.getGridSize()*16, TankzEngine.grid.getGridSize()*16, BufferedImage.TYPE_INT_RGB);
+		buffer2 = new BufferedImage(TankzEngine.grid.getGridSize()*16, TankzEngine.grid.getGridSize()*16, BufferedImage.TYPE_INT_RGB);
 		try {
 			block = ImageIO.read(new File("images/block.png"));
 			empty = ImageIO.read(new File("images/empty.png"));
@@ -32,13 +39,25 @@ public class TankzPanel extends Panel {
 		}
 	}
 	
-	@Override
 	public void paint(Graphics g) {
-		super.paint(g);
-		Graphics2D g2 = (Graphics2D)g;
-		paintBase(g2);
-		paintActiveLayer(g2);
-		paintOverlayLayer(g2);
+		//super.paint(g);
+		if(buffered) {
+			Graphics2D g2 = (Graphics2D)buffer2.getGraphics();
+			g.drawImage(buffer1,0,0,null);
+			paintBase(g2);
+			paintActiveLayer(g2);
+			paintOverlayLayer(g2);	
+			
+			buffered = false;
+		}else {
+			Graphics2D g2 = (Graphics2D)buffer1.getGraphics();
+			g.drawImage(buffer2,0,0,null);
+			paintBase(g2);
+			paintActiveLayer(g2);
+			paintOverlayLayer(g2);	
+			buffered = true;
+		}
+		
 		
 	}
 	private void paintOverlayLayer(Graphics2D g2) {
