@@ -4,7 +4,7 @@ import java.awt.Image;
 
 public class ActiveObject {
 
-	private int velocity;
+	private float velocity;
 	private Direction direction;
 	private int x;
 	private int y;
@@ -22,11 +22,11 @@ public class ActiveObject {
 	public Direction getDirection() {
 		return direction;
 	}
-	public void setVelocity(int velocity) {
+	public void setVelocity(float velocity) {
 		this.velocity = velocity;
 	}
 	public int getVelocity() {
-		return velocity;
+		return Math.round(velocity);
 	}
 	
 	public int getX() {

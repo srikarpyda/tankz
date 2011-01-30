@@ -1,11 +1,13 @@
 package tankz.core;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.Vector;
 
 import tankz.ui.TankzGameUI;
 
-public class TankzEngine extends Thread {
+public class TankzEngine extends Thread implements KeyListener{
 	
 	public static TankzGameUI ui;
 	public static TankzGrid grid;
@@ -19,9 +21,8 @@ public class TankzEngine extends Thread {
 		this.setupGrid();
 		active = new Vector<ActiveObject>();
 		active.add(new Tank(16*8, 16*8));
-		active.get(0).setDirection(Direction.WEST);
-		active.get(0).setVelocity(1);
-		ui = new TankzGameUI();	
+		ui = new TankzGameUI();
+		ui.addKeyListener(this);
 	}
 	
 	public TankzEngine(File file){
@@ -34,7 +35,7 @@ public class TankzEngine extends Thread {
 				ui.repaintGame();
 				iterateLogic();
 				try {
-					sleep(25);
+					sleep(10);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -70,4 +71,55 @@ public class TankzEngine extends Thread {
 		grid.setState(8, 8, TankzTileState.TANK_START);
 		grid.setState(4, 4, TankzTileState.POWERUP);
 	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		if(arg0.getKeyCode()==KeyEvent.VK_UP){
+			active.get(0).setDirection(Direction.NORTH);
+			active.get(0).setVelocity((float) 0.5);
+		}else if(arg0.getKeyCode()==KeyEvent.VK_LEFT){
+			active.get(0).setDirection(Direction.WEST);
+			active.get(0).setVelocity((float) 0.5);
+		}else if(arg0.getKeyCode()==KeyEvent.VK_RIGHT){
+			active.get(0).setDirection(Direction.EAST);
+			active.get(0).setVelocity((float) 0.5);
+		}else if(arg0.getKeyCode()==KeyEvent.VK_DOWN){
+			active.get(0).setDirection(Direction.SOUTH);
+			active.get(0).setVelocity((float) 0.5);
+		}else if(arg0.getKeyCode()==KeyEvent.VK_SPACE){
+			System.out.println("Space Pressed");
+		}else if(arg0.getKeyCode()==KeyEvent.VK_ESCAPE){
+			System.out.println("Escape Pressed");
+		}else{
+			System.out.println("Undefined Key");
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		if(arg0.getKeyCode()==KeyEvent.VK_UP){
+			active.get(0).setDirection(Direction.NORTH);
+			active.get(0).setVelocity(0);
+		}else if(arg0.getKeyCode()==KeyEvent.VK_LEFT){
+			active.get(0).setDirection(Direction.WEST);
+			active.get(0).setVelocity(0);
+		}else if(arg0.getKeyCode()==KeyEvent.VK_RIGHT){
+			active.get(0).setDirection(Direction.EAST);
+			active.get(0).setVelocity(0);
+		}else if(arg0.getKeyCode()==KeyEvent.VK_DOWN){
+			active.get(0).setDirection(Direction.SOUTH);
+			active.get(0).setVelocity(0);
+		}else{
+			System.out.println("Undefined Key");
+		}
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
