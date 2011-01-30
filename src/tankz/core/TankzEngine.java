@@ -95,6 +95,7 @@ public class TankzEngine extends Thread implements KeyListener{
 			active.get(0).setVelocity((float) 0.5);
 		}else if(arg0.getKeyCode()==KeyEvent.VK_SPACE){
 			Shell shell = new Shell(active.get(0).getX()+8,active.get(0).getY()+8);
+			active.add(shell);
 			shell.setDirection(active.get(0).getDirection());
 			shell.setVelocity((float) 0.75);
 		}else if(arg0.getKeyCode()==KeyEvent.VK_ESCAPE){
