@@ -1,10 +1,17 @@
 package tankz.ui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageFilter;
+import java.awt.image.ImageProducer;
+import java.awt.image.RGBImageFilter;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,15 +23,14 @@ import javax.swing.JPanel;
 import tankz.core.TankzEngine;
 
 public class TankzMainMenu extends JFrame implements ActionListener {
-	
+
 	private static final long serialVersionUID = 1778972834916181412L; 
 	private JPanel pane;
-	
 	private JButton newGame,options,help,about,exit;
-	
+
 	public TankzMainMenu () {
 		super("Tankz");
-		
+
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(new File("images/tank.png"));
@@ -34,12 +40,12 @@ public class TankzMainMenu extends JFrame implements ActionListener {
 		if(image != null) {
 			setIconImage(image);
 		}
-		
-		
+
+
 		pane = new JPanel();
 		pane.setPreferredSize(new Dimension(300,200));
 		pane.setLayout(new GridLayout(5,1));
-		
+
 		newGame = new JButton("New Game");
 		newGame.addActionListener(this);
 		options = new JButton("Options");
@@ -50,13 +56,13 @@ public class TankzMainMenu extends JFrame implements ActionListener {
 		about.addActionListener(this);
 		exit = new JButton("Exit");
 		exit.addActionListener(this);
-		
+
 		pane.add(newGame);
 		pane.add(options);
 		pane.add(help);
 		pane.add(about);
 		pane.add(exit);
-		
+
 		add(pane);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
@@ -70,16 +76,15 @@ public class TankzMainMenu extends JFrame implements ActionListener {
 			new TankzEngine().start();
 			dispose();
 		}else if (e.getSource() == options) {
-			
+
 		}else if(e.getSource() == help) {
-			
+
 		}else if(e.getSource() == about) {
-			
+
 		}else if(e.getSource() == exit) {
 			System.exit(0);
 		}else {
 			//Something odd has happened. This should never get called
 		}
 	}
-
 }
