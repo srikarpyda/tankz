@@ -19,6 +19,8 @@ public class TankzEngine extends Thread {
 		this.setupGrid();
 		active = new Vector<ActiveObject>();
 		active.add(new Tank(16*8, 16*8));
+		active.get(0).setDirection(Direction.WEST);
+		active.get(0).setVelocity(1);
 		ui = new TankzGameUI();	
 	}
 	
@@ -32,7 +34,7 @@ public class TankzEngine extends Thread {
 				ui.repaintGame();
 				iterateLogic();
 				try {
-					sleep(1000);
+					sleep(25);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -50,6 +52,9 @@ public class TankzEngine extends Thread {
 	}
 	
 	private void iterateLogic() {
+		for(ActiveObject object : active){
+			object.action();
+		}
 	}
 	
 	private void setupGrid(){
