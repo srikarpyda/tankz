@@ -50,7 +50,6 @@ public class TankzEngine extends Thread {
 	}
 	
 	private void iterateLogic() {
-		//TODO game logic
 	}
 	
 	private void setupGrid(){
