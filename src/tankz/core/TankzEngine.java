@@ -94,9 +94,11 @@ public class TankzEngine extends Thread implements KeyListener{
 			active.get(0).setDirection(Direction.SOUTH);
 			active.get(0).setVelocity((float) 0.5);
 		}else if(arg0.getKeyCode()==KeyEvent.VK_SPACE){
-			System.out.println("Space Pressed");
+			Shell shell = new Shell(active.get(0).getX()+8,active.get(0).getY()+8);
+			shell.setDirection(active.get(0).getDirection());
+			shell.setVelocity((float) 0.75);
 		}else if(arg0.getKeyCode()==KeyEvent.VK_ESCAPE){
-			System.out.println("Escape Pressed");
+			togglePaused();
 		}else{
 			System.out.println("Undefined Key");
 		}
