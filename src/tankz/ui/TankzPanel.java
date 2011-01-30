@@ -6,9 +6,11 @@ import java.awt.Image;
 import java.awt.Panel;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 
+import tankz.core.ActiveObject;
 import tankz.core.TankzEngine;
 
 public class TankzPanel extends Panel {
@@ -45,8 +47,12 @@ public class TankzPanel extends Panel {
 	}
 
 	private void paintActiveLayer(Graphics2D g2) {
-		// TODO Auto-generated method stub
-		
+		for (Iterator i = TankzEngine.active.iterator(); i.hasNext();) {
+			ActiveObject a = (ActiveObject) i.next();
+			if(a.getImage() != null){
+				g2.drawImage(a.getImage(),a.getX(),a.getY(),null);
+			}
+		}		
 	}
 
 	private void paintBase(Graphics2D g2) {
