@@ -42,6 +42,27 @@ public class Tank extends ActiveObject {
 		
 	}
 	
+	public void action(){
+		if(this.getVelocity() > 0){
+			switch (this.getDirection()){
+			case NORTH:
+				this.setY(this.getY()-1);
+				break;
+			case EAST:
+				this.setX(this.getX()+1);
+				break;
+			case SOUTH:
+				this.setY(this.getY()+1);
+				break;
+			case WEST:
+				this.setX(this.getX()-1);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	
 	
 	
 }
