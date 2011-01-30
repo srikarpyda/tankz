@@ -110,6 +110,8 @@ public class TankzEngine extends Thread implements KeyListener{
 		}else if(arg0.getKeyCode()==KeyEvent.VK_DOWN){
 			active.get(0).setDirection(Direction.SOUTH);
 			active.get(0).setVelocity(0);
+		}else if(arg0.getKeyCode()==KeyEvent.VK_SPACE){
+			
 		}else{
 			System.out.println("Undefined Key");
 		}
