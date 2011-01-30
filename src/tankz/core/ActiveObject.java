@@ -4,6 +4,8 @@ public class ActiveObject {
 
 	private int velocity;
 	private Direction direction;
+	private int x;
+	private int y;
 	
 	public ActiveObject(){
 		this.velocity = 0;
@@ -22,5 +24,14 @@ public class ActiveObject {
 	public int getVelocity() {
 		return velocity;
 	}
+	
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
 	
 }
