@@ -1,6 +1,7 @@
 package tankz.core;
 
 import java.io.File;
+import java.util.Vector;
 
 import tankz.ui.TankzGameUI;
 
@@ -8,6 +9,7 @@ public class TankzEngine extends Thread {
 	
 	public static TankzGameUI ui;
 	public static TankzGrid grid;
+	public static Vector<ActiveObject> active;
 	private boolean isRunning = true;
 	private boolean isPaused = false;
 	
@@ -15,6 +17,8 @@ public class TankzEngine extends Thread {
 		super("GameEngine");
 		grid = new TankzGrid(9);
 		this.setupGrid();
+		active = new Vector<ActiveObject>();
+		active.add(new Tank(16*8, 16*8));
 		ui = new TankzGameUI();	
 	}
 	

@@ -1,5 +1,7 @@
 package tankz.core;
 
+import java.awt.Image;
+
 public class ActiveObject {
 
 	private int velocity;
@@ -7,9 +9,11 @@ public class ActiveObject {
 	private int x;
 	private int y;
 	
-	public ActiveObject(){
+	public ActiveObject(int x, int y){
 		this.velocity = 0;
 		this.direction = Direction.NORTH;
+		this.x = x;
+		this.y = y;
 	}
 	
 	public void setDirection(Direction direction) {
@@ -33,5 +37,8 @@ public class ActiveObject {
 		return y;
 	}
 
+	public Image getImage(){
+		return null;
+	}
 	
 }
