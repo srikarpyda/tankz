@@ -10,7 +10,8 @@ public class Tank extends ActiveObject {
 	
 	private Image tank;
 	
-	public Tank(){
+	public Tank(int x, int y){
+		super(x, y);
 		try{
 			tank = ImageIO.read(new File("images/tank.png"));
 		}catch(IOException e){
@@ -19,7 +20,7 @@ public class Tank extends ActiveObject {
 		}
 	}
 
-	public Image getTank() {
+	public Image getImage() {
 		return tank;
 	}
 	
