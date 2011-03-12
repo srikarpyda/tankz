@@ -47,7 +47,7 @@ public class Tank extends ActiveObject {
 			case NORTH:
 				nextY = this.getY()-this.getVelocity();
 				nextX = this.getX();
-				if(canMove(new Point(nextX, nextY), new Point(nextX+15, nextY))) {
+				if(canMove(new Point(nextX, nextY), new Point(nextX+13, nextY))) {
 					setX(nextX);
 					setY(nextY);
 				}	
@@ -55,7 +55,7 @@ public class Tank extends ActiveObject {
 			case EAST:
 				nextX = this.getX()+this.getVelocity();
 				nextY = this.getY();
-				if(canMove(new Point(nextX+15, nextY), new Point(nextX+15, nextY-15))) {
+				if(canMove(new Point(nextX+13, nextY), new Point(nextX+13, nextY+13))) {
 					setX(nextX);
 					setY(nextY);
 				}
@@ -63,7 +63,7 @@ public class Tank extends ActiveObject {
 			case SOUTH:
 				nextY = this.getY()+this.getVelocity();
 				nextX = this.getX();
-				if(canMove(new Point(nextX, nextY-15), new Point(nextX+15, nextY-15))) {
+				if(canMove(new Point(nextX, nextY+13), new Point(nextX+15, nextY+13))) {
 					setX(nextX);
 					setY(nextY);
 				}
@@ -71,7 +71,7 @@ public class Tank extends ActiveObject {
 			case WEST:
 				nextX = this.getX()-this.getVelocity();
 				nextY = this.getY();
-				if(canMove(new Point(nextX, nextY), new Point(nextX, nextY-15))) {
+				if(canMove(new Point(nextX, nextY), new Point(nextX, nextY+13))) {
 					setX(nextX);
 					setY(nextY);
 				}
@@ -87,9 +87,10 @@ public class Tank extends ActiveObject {
 		}
 	}	
 	public boolean canMove(Point p1, Point p2) {
-		System.out.println("P1 : " + p1.getString() + " P2 : " + p2.getString());
+		
 		try{
-			if(TankzEngine.grid.getState(p1.getX()/16, p1.getY()/16) != TankzTileState.BLOCKED /*&& TankzEngine.grid.getState(p2.getX()/16, p2.getY()/16) != TankzTileState.BLOCKED*/) {
+			System.out.println("P1 : " + p1.getString() + " " + TankzEngine.grid.getState(p1.getX()/20, p1.getY()/20) + " P2 : " + p2.getString() + " Grid State: " + TankzEngine.grid.getState(p2.getX()/20, p2.getY()/20));
+			if(TankzEngine.grid.getState(p1., p1.getY()/20) != TankzTileState.BLOCKED && TankzEngine.grid.getState(p2.getX()/20, p2.getY()/20) != TankzTileState.BLOCKED) {
 				return true;
 			}
 		}catch (ArrayIndexOutOfBoundsException e) {
