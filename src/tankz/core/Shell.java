@@ -9,9 +9,11 @@ import javax.imageio.ImageIO;
 public class Shell extends ActiveObject {
 
 	private Image shell;
+	private ActiveObject parent;
 	
-	public Shell(int x, int y) {
+	public Shell(int x, int y, ActiveObject parent) {
 		super(x, y);
+		this.parent = parent;
 		try{
 			shell = ImageIO.read(new File("images/bullet.png"));
 		}catch(IOException e){
@@ -44,5 +46,9 @@ public class Shell extends ActiveObject {
 			}
 		}
 	}	
+	
+	public ActiveObject getParent(){
+		return this.parent;
+	}
 
 }

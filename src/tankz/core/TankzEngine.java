@@ -93,16 +93,16 @@ public class TankzEngine extends Thread implements KeyListener{
 			Shell shell = null;
 			switch (active.get(0).getDirection()){
 			case NORTH:
-				shell = new Shell(active.get(0).getX(),active.get(0).getY()-8);
+				shell = new Shell(active.get(0).getX(),active.get(0).getY()-8, active.get(0));
 				break;
 			case EAST:
-				shell = new Shell(active.get(0).getX()+8,active.get(0).getY());
+				shell = new Shell(active.get(0).getX()+8,active.get(0).getY(), active.get(0));
 				break;
 			case SOUTH:
-				shell = new Shell(active.get(0).getX(),active.get(0).getY()+8);
+				shell = new Shell(active.get(0).getX(),active.get(0).getY()+8, active.get(0));
 				break;
 			case WEST:
-				shell = new Shell(active.get(0).getX()-8,active.get(0).getY());
+				shell = new Shell(active.get(0).getX()-8,active.get(0).getY(), active.get(0));
 				break;
 			default:
 				break;
