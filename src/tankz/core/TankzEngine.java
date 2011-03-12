@@ -90,7 +90,23 @@ public class TankzEngine extends Thread implements KeyListener{
 		if(arg0.getKeyCode()==KeyEvent.VK_UP || arg0.getKeyCode()==KeyEvent.VK_LEFT || arg0.getKeyCode()==KeyEvent.VK_RIGHT || arg0.getKeyCode()==KeyEvent.VK_DOWN){
 			moveTank(arg0);
 		}else if(arg0.getKeyCode()==KeyEvent.VK_SPACE){
-			Shell shell = new Shell(active.get(0).getX()+8,active.get(0).getY()+8);
+			Shell shell = null;
+			switch (active.get(0).getDirection()){
+			case NORTH:
+				shell = new Shell(active.get(0).getX(),active.get(0).getY()-8);
+				break;
+			case EAST:
+				shell = new Shell(active.get(0).getX()+8,active.get(0).getY());
+				break;
+			case SOUTH:
+				shell = new Shell(active.get(0).getX(),active.get(0).getY()+8);
+				break;
+			case WEST:
+				shell = new Shell(active.get(0).getX()-8,active.get(0).getY());
+				break;
+			default:
+				break;
+			}
 			active.add(shell);
 			shell.setDirection(active.get(0).getDirection());
 			shell.setVelocity((float) 0.75);
