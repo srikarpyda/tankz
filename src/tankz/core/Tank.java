@@ -47,7 +47,7 @@ public class Tank extends ActiveObject {
 			case NORTH:
 				nextY = this.getY()-this.getVelocity();
 				nextX = this.getX();
-				if(canMove(new Point(nextX, nextY), new Point(nextX+13, nextY))) {
+				if(canMove(new Point(nextX, nextY), new Point(nextX+15, nextY))) {
 					setX(nextX);
 					setY(nextY);
 				}	
@@ -55,7 +55,7 @@ public class Tank extends ActiveObject {
 			case EAST:
 				nextX = this.getX()+this.getVelocity();
 				nextY = this.getY();
-				if(canMove(new Point(nextX+13, nextY), new Point(nextX+13, nextY+13))) {
+				if(canMove(new Point(nextX+15, nextY), new Point(nextX+15, nextY+15))) {
 					setX(nextX);
 					setY(nextY);
 				}
@@ -63,7 +63,7 @@ public class Tank extends ActiveObject {
 			case SOUTH:
 				nextY = this.getY()+this.getVelocity();
 				nextX = this.getX();
-				if(canMove(new Point(nextX, nextY+13), new Point(nextX+15, nextY+13))) {
+				if(canMove(new Point(nextX, nextY+15), new Point(nextX+15, nextY+15))) {
 					setX(nextX);
 					setY(nextY);
 				}
@@ -71,7 +71,7 @@ public class Tank extends ActiveObject {
 			case WEST:
 				nextX = this.getX()-this.getVelocity();
 				nextY = this.getY();
-				if(canMove(new Point(nextX, nextY), new Point(nextX, nextY+13))) {
+				if(canMove(new Point(nextX, nextY), new Point(nextX, nextY+15))) {
 					setX(nextX);
 					setY(nextY);
 				}
