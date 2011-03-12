@@ -26,8 +26,8 @@ public class TankzPanel extends Panel {
 	
 	public TankzPanel() {
 		block = null;
-		buffer1 = new BufferedImage(TankzEngine.grid.getGridSize()*16, TankzEngine.grid.getGridSize()*16, BufferedImage.TYPE_INT_RGB);
-		buffer2 = new BufferedImage(TankzEngine.grid.getGridSize()*16, TankzEngine.grid.getGridSize()*16, BufferedImage.TYPE_INT_RGB);
+		buffer1 = new BufferedImage(TankzEngine.grid.getGridSize()*20, TankzEngine.grid.getGridSize()*20, BufferedImage.TYPE_INT_RGB);
+		buffer2 = new BufferedImage(TankzEngine.grid.getGridSize()*20, TankzEngine.grid.getGridSize()*20, BufferedImage.TYPE_INT_RGB);
 		try {
 			block = ImageIO.read(new File("images/block.png"));
 			empty = ImageIO.read(new File("images/empty.png"));
@@ -78,10 +78,10 @@ public class TankzPanel extends Panel {
 			for (int y = 0; y < TankzEngine.grid.getGridSize(); y++) {
 				switch (TankzEngine.grid.getState(x, y)) {
 				case BLOCKED:
-					g2.drawImage(block,x*16,y*16,null);
+					g2.drawImage(block,x*20,y*20,null);
 					break;
 				default:
-					g2.drawImage(empty,x*16,y*16,null);
+					g2.drawImage(empty,x*20,y*20,null);
 					break;
 				}
 			}

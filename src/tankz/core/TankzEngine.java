@@ -26,7 +26,7 @@ public class TankzEngine extends Thread implements KeyListener{
 		grid = new TankzGrid(9);
 		this.setupGrid();
 		active = new Vector<ActiveObject>();
-		active.add(new Tank(16*8, 16*8));
+		active.add(new Tank(20*8, 20*8));
 		ui = new TankzGameUI();
 		ui.addKeyListener(this);
 	}
@@ -115,7 +115,7 @@ public class TankzEngine extends Thread implements KeyListener{
 			downButtonPressed = true;
 			active.get(0).setDirection(Direction.SOUTH);
 		}
-		active.get(0).setVelocity((float) 0.5);
+		active.get(0).setVelocity((float) 1);
 	}
 
 	@Override

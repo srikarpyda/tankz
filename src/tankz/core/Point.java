@@ -17,6 +17,15 @@ public class Point {
 		return y;
 	}
 	public String getString() {
-		return "X: " + x + "Y: " + y;
+		return "X: " + x + " Y: " + y;
+	}
+	public int getGridX() {
+		return x/20;
+	}
+	public int getGridY() {
+		return y/20;
+	}
+	public TankzTileState getGridState() {
+		return TankzEngine.grid.getState(getGridX(),getGridY());
 	}
 }
