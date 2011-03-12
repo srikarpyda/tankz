@@ -89,8 +89,8 @@ public class Tank extends ActiveObject {
 	public boolean canMove(Point p1, Point p2) {
 		
 		try{
-			System.out.println("P1 : " + p1.getString() + " " + TankzEngine.grid.getState(p1.getX()/20, p1.getY()/20) + " P2 : " + p2.getString() + " Grid State: " + TankzEngine.grid.getState(p2.getX()/20, p2.getY()/20));
-			if(TankzEngine.grid.getState(p1., p1.getY()/20) != TankzTileState.BLOCKED && TankzEngine.grid.getState(p2.getX()/20, p2.getY()/20) != TankzTileState.BLOCKED) {
+			System.out.println("P1 : " + p1.getString() + " " + p1.getGridInfo() + " P2 : " + p2.getString() + p2.getGridInfo());
+			if(p1.getGridState() != TankzTileState.BLOCKED && p2.getGridState() != TankzTileState.BLOCKED) {
 				return true;
 			}
 		}catch (ArrayIndexOutOfBoundsException e) {

@@ -28,4 +28,9 @@ public class Point {
 	public TankzTileState getGridState() {
 		return TankzEngine.grid.getState(getGridX(),getGridY());
 	}
+
+	public String getGridInfo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
