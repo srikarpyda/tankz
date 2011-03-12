@@ -26,11 +26,13 @@ public class Point {
 		return y/20;
 	}
 	public TankzTileState getGridState() {
+		if(x < 0 || y < 0) {
+			return TankzTileState.BLOCKED;
+		}
 		return TankzEngine.grid.getState(getGridX(),getGridY());
 	}
 
 	public String getGridInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return " Tile Location X: " + getGridX() + " Y: " + getGridY() + " Tile State: " + getGridState();
 	}
 }
