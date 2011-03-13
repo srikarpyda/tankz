@@ -134,4 +134,29 @@ public class Tank extends ActiveObject {
 			
 		}
 	}
+	
+	public void fire(){
+		Shell shell = null;
+		
+		switch (this.getDirection()){
+		case NORTH:
+			shell = new Shell(this.getX(),this.getY()-8, this);
+			break;
+		case EAST:
+			shell = new Shell(this.getX()+8,this.getY(), this);
+			break;
+		case SOUTH:
+			shell = new Shell(this.getX(),this.getY()+8, this);
+			break;
+		case WEST:
+			shell = new Shell(this.getX()-8,this.getY(), this);
+			break;
+		default:
+			break;
+		}
+		this.addChild(shell);
+		shell.setDirection(this.getDirection());
+		shell.setVelocity((float) 2);
+		
+	}
 }
