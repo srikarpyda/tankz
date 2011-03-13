@@ -79,7 +79,7 @@ public class TankzGrid {
 		if(spawnCounter >= spawnPoints.size()) {
 			spawnCounter = 0;
 		}else {
-			spawnCounter++;
+			spawnCounter+=2;
 		}
 		System.out.println("Spawn point num:" + spawnPoints.size() + " Spawn Counter: " + spawnCounter);
 		System.out.println("Spawn Point: " + spawnPoints.get(spawnCounter).toString());
