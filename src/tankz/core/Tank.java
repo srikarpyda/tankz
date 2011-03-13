@@ -1,6 +1,7 @@
 package tankz.core;
 
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
@@ -14,11 +15,21 @@ public class Tank extends ActiveObject {
 	private Image tank_south;
 	private Image tank_west;
 	private Vector<ActiveObject> bullets = new Vector<ActiveObject>();
+	private int north, south, east, west, fire;
+	private boolean upButtonPressed = false; 
+	private boolean downButtonPressed = false; 
+	private boolean leftButtonPressed = false; 
+	private boolean rightButtonPressed = false;
 
 
-	public Tank(int x, int y){
+	public Tank(int x, int y, int north, int south, int east, int west, int fire){
 		super(x, y);
 		this.setHealth(5);
+		this.north = north;
+		this.south = south;
+		this.west = west;
+		this.east = east;
+		this.fire = fire;
 		try{
 			tank_north = ImageIO.read(new File("images/tank_north.png"));
 			tank_east = ImageIO.read(new File("images/tank_east.png"));
@@ -29,9 +40,14 @@ public class Tank extends ActiveObject {
 			System.exit(1);
 		}
 	}
-	public Tank() {
+	public Tank(int north, int south, int east, int west, int fire) {
 		super(0,0);
 		this.setHealth(5);
+		this.north = north;
+		this.south = south;
+		this.west = west;
+		this.east = east;
+		this.fire = fire;
 		try{
 			tank_north = ImageIO.read(new File("images/tank_north.png"));
 			tank_east = ImageIO.read(new File("images/tank_east.png"));
@@ -158,6 +174,64 @@ public class Tank extends ActiveObject {
 		shell.setDirection(this.getDirection());
 		shell.setVelocity((float) 2);
 		
+	}
+	
+	public void keyPressed(KeyEvent key){
+		if(key.getKeyCode()==this.north){
+			upButtonPressed = true;
+			this.setDirection(Direction.NORTH);
+			this.setVelocity((float) 1);
+		}else if(key.getKeyCode()==this.south){
+			downButtonPressed = true;
+			this.setDirection(Direction.SOUTH);
+			this.setVelocity((float) 1);
+		}else if(key.getKeyCode()==this.west){
+			leftButtonPressed = true;
+			this.setDirection(Direction.WEST);
+			this.setVelocity((float) 1);
+		}else if(key.getKeyCode()==this.east){
+			rightButtonPressed = true;
+			this.setDirection(Direction.EAST);
+			this.setVelocity((float) 1);
+		}else if(key.getKeyCode()==this.fire){
+			this.fire();
+		}
+	}
+	
+	public void keyReleased(KeyEvent key){
+		stopTank(key);
+	}
+	
+	private void stopTank(KeyEvent e) {
+		if(numOfKeys() < 1) {
+			this.setVelocity(0);
+		}	
+		if(e.getKeyCode()==this.north){					
+			upButtonPressed = false;
+		}else if(e.getKeyCode()==this.west){
+			leftButtonPressed = false;
+		}else if(e.getKeyCode()==this.east){
+			rightButtonPressed = false;
+		}else if(e.getKeyCode()==this.south){
+			downButtonPressed = false;
+		}
+	}
+	
+	private int numOfKeys() {
+		int r = 0;
+		if(upButtonPressed){
+			r++;
+		}
+		if(downButtonPressed) {
+			r++;
+		}
+		if(leftButtonPressed) {
+			r++;
+		}
+		if(rightButtonPressed) {
+			r++;
+		}
+		return r;
 	}
 public void resetHealth() {
 	 this.setHealth(5);	

@@ -1,6 +1,7 @@
 package tankz.core;
 
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 public class ActiveObject {
@@ -79,7 +80,16 @@ public class ActiveObject {
 	public void fire(){
 		
 	}
+	
+	public void keyPressed(KeyEvent key){
+		
+	}
 	public void resetHealth() {
 		
 	}
+	public void keyReleased(KeyEvent key){
+		
+	}
+	
+	
 }
