@@ -140,49 +140,11 @@ public class TankzEngine extends Thread implements KeyListener{
 			}
 		}else if(arg0.getKeyCode()==KeyEvent.VK_CONTROL){
 			if(!isPaused) {
-				Shell shell = null;
-				switch (playerObjects.get(0).getDirection()){
-				case NORTH:
-					shell = new Shell(playerObjects.get(0).getX(),playerObjects.get(0).getY()-8, playerObjects.get(0));
-					break;
-				case EAST:
-					shell = new Shell(playerObjects.get(0).getX()+8,playerObjects.get(0).getY(), playerObjects.get(0));
-					break;
-				case SOUTH:
-					shell = new Shell(playerObjects.get(0).getX(),playerObjects.get(0).getY()+8, playerObjects.get(0));
-					break;
-				case WEST:
-					shell = new Shell(playerObjects.get(0).getX()-8,playerObjects.get(0).getY(), playerObjects.get(0));
-					break;
-				default:
-					break;
-				}
-				playerObjects.get(0).addChild(shell);
-				shell.setDirection(playerObjects.get(0).getDirection());
-				shell.setVelocity((float) 2);
-			}	
+				playerObjects.get(0).fire();
+			}
 		}else if(arg0.getKeyCode()==KeyEvent.VK_SPACE){
 			if(!isPaused) {
-				Shell shell = null;
-				switch (playerObjects.get(1).getDirection()){
-				case NORTH:
-					shell = new Shell(playerObjects.get(1).getX(),playerObjects.get(1).getY()-8, playerObjects.get(1));
-					break;
-				case EAST:
-					shell = new Shell(playerObjects.get(1).getX()+8,playerObjects.get(1).getY(), playerObjects.get(1));
-					break;
-				case SOUTH:
-					shell = new Shell(playerObjects.get(1).getX(),playerObjects.get(1).getY()+8, playerObjects.get(1));
-					break;
-				case WEST:
-					shell = new Shell(playerObjects.get(1).getX()-8,playerObjects.get(1).getY(), playerObjects.get(1));
-					break;
-				default:
-					break;
-				}
-				playerObjects.get(1).addChild(shell);
-				shell.setDirection(playerObjects.get(1).getDirection());
-				shell.setVelocity((float) 2);
+				playerObjects.get(1).fire();
 			}
 		}else if(arg0.getKeyCode()==KeyEvent.VK_ESCAPE){
 			togglePaused();
