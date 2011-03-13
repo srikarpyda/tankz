@@ -66,7 +66,7 @@ public class Shell extends ActiveObject {
 	}	
 
 	private boolean hitsTank(Point p) {
-		for (ActiveObject o : TankzEngine.active) {
+		for (ActiveObject o : TankzEngine.playerObjects) {
 			if(p.getX() > o.getX() && p.getX() < o.getX()+16){
 				if(p.getY() > o.getY() && p.getY() < o.getY()+16) {
 					System.out.println("Object Hit");
