@@ -65,7 +65,7 @@ public class TankzPanel extends Panel {
 	}
 
 	private void paintActiveLayer(Graphics2D g2) {
-		for (Iterator<ActiveObject> i = TankzEngine.active.iterator(); i.hasNext();) {
+		for (Iterator<ActiveObject> i = TankzEngine.getActive().iterator(); i.hasNext();) {
 			ActiveObject a = (ActiveObject) i.next();
 			if(a.getImage() != null){
 				g2.drawImage(a.getImage(),a.getX(),a.getY(),null);

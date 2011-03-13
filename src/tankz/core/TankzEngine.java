@@ -12,8 +12,11 @@ public class TankzEngine extends Thread implements KeyListener{
 
 	public static TankzGameUI ui;
 	public static TankzGrid grid;
-	public static Vector<ActiveObject> active;
+	
+	private static Vector<ActiveObject> active;
 	public static LinkedList<ActiveObject> spawnQueue;
+	public static Vector<ActiveObject> playerObjects;
+	
 	private boolean isRunning = true;
 	private boolean isPaused = false;
 	private boolean repaint = true;
@@ -35,14 +38,19 @@ public class TankzEngine extends Thread implements KeyListener{
 		this.setupGrid();
 		active = new Vector<ActiveObject>();
 		spawnQueue = new LinkedList<ActiveObject>();
-		spawnQueue.add(new Tank());
-		spawnQueue.add(new Tank());
+		playerObjects = new Vector<ActiveObject>();
+		addPlayer(new Tank());
+		addPlayer(new Tank());
 		ui = new TankzGameUI();
 		ui.addKeyListener(this);
 	}
 
 	public TankzEngine(File file){
 		//TODO generate code for this
+	}
+	public void addPlayer(ActiveObject o ) {
+		spawnQueue.add(o);
+		playerObjects.add(o);
 	}
 	public void spawn() {
 		if(spawnQueue.size() != 0) {
@@ -51,7 +59,7 @@ public class TankzEngine extends Thread implements KeyListener{
 				TankzTile spawnPoint = grid.getSpawnPoint();
 				a.setX(spawnPoint.getX());
 				a.setY(spawnPoint.getY());
-				active.add(a);
+				getActive().add(a);
 			}
 
 		}
@@ -92,19 +100,22 @@ public class TankzEngine extends Thread implements KeyListener{
 	}
 
 	private void iterateLogic() {
-		for(ActiveObject object : active){
-			if(object.getHealth()==0) {
-				System.out.println("Deaded");
-				active.remove(object);
-			}else {
-				object.action();
-			}
-			for (int i = 0; i < object.getChildren().size(); i++) {
-				object.getChildren().get(i).action();
-			}
-		}
+			for(ActiveObject object : getActive()){
+				if(object.getHealth()==0) {
+					System.out.println("Deaded");
+					getActive().remove(object);
+					spawnQueue.add(object);
+				}else {
+					object.action();
+				}
+				for (int i = 0; i < object.getChildren().size(); i++) {
+					object.getChildren().get(i).action();
+				}
+			}		
 	}
-
+	public static synchronized Vector<ActiveObject> getActive() {
+		return active;
+	}
 	private void setupGrid(){
 		TankzTileState state = TankzTileState.BLOCKED;
 		for(int x = 1; x < grid.getGridSize(); x+=2){
@@ -136,47 +147,47 @@ public class TankzEngine extends Thread implements KeyListener{
 		}else if(arg0.getKeyCode()==KeyEvent.VK_CONTROL){
 			if(!isPaused) {
 				Shell shell = null;
-				switch (active.get(0).getDirection()){
+				switch (playerObjects.get(0).getDirection()){
 				case NORTH:
-					shell = new Shell(active.get(0).getX(),active.get(0).getY()-8, active.get(0));
+					shell = new Shell(playerObjects.get(0).getX(),playerObjects.get(0).getY()-8, playerObjects.get(0));
 					break;
 				case EAST:
-					shell = new Shell(active.get(0).getX()+8,active.get(0).getY(), active.get(0));
+					shell = new Shell(playerObjects.get(0).getX()+8,playerObjects.get(0).getY(), playerObjects.get(0));
 					break;
 				case SOUTH:
-					shell = new Shell(active.get(0).getX(),active.get(0).getY()+8, active.get(0));
+					shell = new Shell(playerObjects.get(0).getX(),playerObjects.get(0).getY()+8, playerObjects.get(0));
 					break;
 				case WEST:
-					shell = new Shell(active.get(0).getX()-8,active.get(0).getY(), active.get(0));
+					shell = new Shell(playerObjects.get(0).getX()-8,playerObjects.get(0).getY(), playerObjects.get(0));
 					break;
 				default:
 					break;
 				}
-				active.get(0).addChild(shell);
-				shell.setDirection(active.get(0).getDirection());
+				playerObjects.get(0).addChild(shell);
+				shell.setDirection(playerObjects.get(0).getDirection());
 				shell.setVelocity((float) 2);
 			}	
 		}else if(arg0.getKeyCode()==KeyEvent.VK_SPACE){
 			if(!isPaused) {
 				Shell shell = null;
-				switch (active.get(1).getDirection()){
+				switch (playerObjects.get(1).getDirection()){
 				case NORTH:
-					shell = new Shell(active.get(1).getX(),active.get(1).getY()-8, active.get(1));
+					shell = new Shell(playerObjects.get(1).getX(),playerObjects.get(1).getY()-8, playerObjects.get(1));
 					break;
 				case EAST:
-					shell = new Shell(active.get(1).getX()+8,active.get(1).getY(), active.get(1));
+					shell = new Shell(playerObjects.get(1).getX()+8,playerObjects.get(1).getY(), playerObjects.get(1));
 					break;
 				case SOUTH:
-					shell = new Shell(active.get(1).getX(),active.get(1).getY()+8, active.get(1));
+					shell = new Shell(playerObjects.get(1).getX(),playerObjects.get(1).getY()+8, playerObjects.get(1));
 					break;
 				case WEST:
-					shell = new Shell(active.get(1).getX()-8,active.get(1).getY(), active.get(1));
+					shell = new Shell(playerObjects.get(1).getX()-8,playerObjects.get(1).getY(), playerObjects.get(1));
 					break;
 				default:
 					break;
 				}
-				active.get(1).addChild(shell);
-				shell.setDirection(active.get(1).getDirection());
+				playerObjects.get(1).addChild(shell);
+				shell.setDirection(playerObjects.get(1).getDirection());
 				shell.setVelocity((float) 2);
 			}
 		}else if(arg0.getKeyCode()==KeyEvent.VK_ESCAPE){
@@ -189,36 +200,36 @@ public class TankzEngine extends Thread implements KeyListener{
 	private void moveTank(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_UP){
 			upButtonPressed = true;
-			active.get(0).setDirection(Direction.NORTH);
-			active.get(0).setVelocity((float) 1);
+			playerObjects.get(0).setDirection(Direction.NORTH);
+			playerObjects.get(0).setVelocity((float) 1);
 		}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
 			leftButtonPressed = true;
-			active.get(0).setDirection(Direction.WEST);
-			active.get(0).setVelocity((float) 1);
+			playerObjects.get(0).setDirection(Direction.WEST);
+			playerObjects.get(0).setVelocity((float) 1);
 		}else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 			rightButtonPressed = true;
-			active.get(0).setDirection(Direction.EAST);
-			active.get(0).setVelocity((float) 1);
+			playerObjects.get(0).setDirection(Direction.EAST);
+			playerObjects.get(0).setVelocity((float) 1);
 		}else if(e.getKeyCode()==KeyEvent.VK_DOWN){
 			downButtonPressed = true;
-			active.get(0).setDirection(Direction.SOUTH);
-			active.get(0).setVelocity((float) 1);
+			playerObjects.get(0).setDirection(Direction.SOUTH);
+			playerObjects.get(0).setVelocity((float) 1);
 		}else if(e.getKeyCode()==KeyEvent.VK_W){
 			wButtonPressed = true;
-			active.get(1).setDirection(Direction.NORTH);
-			active.get(1).setVelocity((float) 1);
+			playerObjects.get(1).setDirection(Direction.NORTH);
+			playerObjects.get(1).setVelocity((float) 1);
 		}else if(e.getKeyCode()==KeyEvent.VK_A){
 			aButtonPressed = true;
-			active.get(1).setDirection(Direction.WEST);
-			active.get(1).setVelocity((float) 1);
+			playerObjects.get(1).setDirection(Direction.WEST);
+			playerObjects.get(1).setVelocity((float) 1);
 		}else if(e.getKeyCode()==KeyEvent.VK_S){
 			sButtonPressed = true;
-			active.get(1).setDirection(Direction.SOUTH);
-			active.get(1).setVelocity((float) 1);
+			playerObjects.get(1).setDirection(Direction.SOUTH);
+			playerObjects.get(1).setVelocity((float) 1);
 		}else if(e.getKeyCode()==KeyEvent.VK_D){
 			dButtonPressed = true;
-			active.get(1).setDirection(Direction.EAST);
-			active.get(1).setVelocity((float) 1);
+			playerObjects.get(1).setDirection(Direction.EAST);
+			playerObjects.get(1).setVelocity((float) 1);
 		}
 		
 	}
@@ -226,14 +237,14 @@ public class TankzEngine extends Thread implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		if(arg0.getKeyCode()==KeyEvent.VK_UP || arg0.getKeyCode()==KeyEvent.VK_LEFT || arg0.getKeyCode()==KeyEvent.VK_RIGHT || arg0.getKeyCode()==KeyEvent.VK_DOWN){
-			stopTank(arg0, active.get(0));
+			stopTank(arg0, playerObjects.get(0));
 		}else if(arg0.getKeyCode()==KeyEvent.VK_W || arg0.getKeyCode()==KeyEvent.VK_A || arg0.getKeyCode()==KeyEvent.VK_D || arg0.getKeyCode()==KeyEvent.VK_S){
-			stopTank(arg0, active.get(1));
+			stopTank(arg0, playerObjects.get(1));
 		}
 	}
 	private int numOfKeys(ActiveObject object) {
 		int r = 0;
-		if(object==active.get(0)){
+		if(object==playerObjects.get(0)){
 			if(upButtonPressed){
 				r++;
 			}
@@ -246,7 +257,7 @@ public class TankzEngine extends Thread implements KeyListener{
 			if(rightButtonPressed) {
 				r++;
 			}
-		}else if(object==active.get(1)){
+		}else if(object==playerObjects.get(1)){
 			if(wButtonPressed){
 				r++;
 			}
