@@ -1,6 +1,7 @@
 package tankz.core;
 
 import java.awt.Image;
+import java.util.Vector;
 
 public class ActiveObject {
 
@@ -51,6 +52,18 @@ public class ActiveObject {
 	
 	public void action(){
 	
+	}
+	
+	public void addChild(ActiveObject object){
+		
+	}
+	
+	public Vector<ActiveObject> getChildren(){
+		return null;
+	}
+	
+	public void removeChild(ActiveObject object){
+		
 	}
 	
 }

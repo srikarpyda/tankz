@@ -3,7 +3,6 @@ package tankz.core;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Vector;
 
@@ -136,7 +135,7 @@ public class TankzEngine extends Thread implements KeyListener{
 				default:
 					break;
 				}
-				active.add(shell);
+				active.get(0).addChild(shell);
 				shell.setDirection(active.get(0).getDirection());
 				shell.setVelocity((float) 2);
 			}
