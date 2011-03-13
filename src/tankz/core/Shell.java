@@ -51,14 +51,33 @@ public class Shell extends ActiveObject {
 				nextY = this.getY();
 				break;
 			}
-			if(canMove(new Point(nextX+8, nextY+8))) {
-				setX(nextX);
-				setY(nextY);
+			Point p = new Point(nextX+8, nextY+8);
+			if(canMove(p)) {
+				if(hitsTank(p)) {
+					parent.removeChild(this);
+				}else {
+					setX(nextX);
+					setY(nextY);
+				}
 			}else {
 				parent.removeChild(this);
 			}
 		}
 	}	
+
+	private boolean hitsTank(Point p) {
+		for (ActiveObject o : TankzEngine.active) {
+			if(p.getX() > o.getX() && p.getX() < o.getX()+16){
+				if(p.getY() > o.getY() && p.getY() < o.getY()+16) {
+					System.out.println("Object Hit");
+					System.out.println(o.getHealth());
+					o.registerHit();
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	public ActiveObject getParent(){
 		return this.parent;

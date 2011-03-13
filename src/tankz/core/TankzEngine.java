@@ -93,7 +93,12 @@ public class TankzEngine extends Thread implements KeyListener{
 
 	private void iterateLogic() {
 		for(ActiveObject object : active){
-			object.action();
+			if(object.getHealth()==0) {
+				System.out.println("Deaded");
+				active.remove(object);
+			}else {
+				object.action();
+			}
 			for (int i = 0; i < object.getChildren().size(); i++) {
 				object.getChildren().get(i).action();
 			}

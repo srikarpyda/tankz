@@ -15,8 +15,10 @@ public class Tank extends ActiveObject {
 	private Image tank_west;
 	private Vector<ActiveObject> bullets = new Vector<ActiveObject>();
 
+
 	public Tank(int x, int y){
 		super(x, y);
+		this.setHealth(5);
 		try{
 			tank_north = ImageIO.read(new File("images/tank_north.png"));
 			tank_east = ImageIO.read(new File("images/tank_east.png"));
@@ -29,6 +31,7 @@ public class Tank extends ActiveObject {
 	}
 	public Tank() {
 		super(0,0);
+		this.setHealth(5);
 		try{
 			tank_north = ImageIO.read(new File("images/tank_north.png"));
 			tank_east = ImageIO.read(new File("images/tank_east.png"));
@@ -101,7 +104,7 @@ public class Tank extends ActiveObject {
 		}
 	}	
 	public boolean canMove(Point p1, Point p2) {
-		
+
 		try{
 			System.out.println("P1 : " + p1.getString() + " " + p1.getGridInfo() + " P2 : " + p2.getString() + p2.getGridInfo());
 			if(p1.getGridState() != TankzTileState.BLOCKED && p2.getGridState() != TankzTileState.BLOCKED) {
@@ -112,17 +115,23 @@ public class Tank extends ActiveObject {
 		}
 		return false;
 	}
-	
+
 	public void addChild(ActiveObject shell){
 		this.bullets.add(shell);
 	}
-	
+
 	public void removeChild(ActiveObject shell){
 		this.bullets.remove(shell);
 	}
-	
+
 	public Vector<ActiveObject> getChildren(){
 		return (Vector<ActiveObject>)bullets;
 	}
-	
+	public void registerHit() {
+		this.setHealth(this.getHealth()-1);
+		if(this.getHealth() == 0) {
+			System.out.println("TANK DEAD");
+			
+		}
+	}
 }

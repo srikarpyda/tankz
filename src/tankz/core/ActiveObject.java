@@ -9,12 +9,14 @@ public class ActiveObject {
 	private Direction direction;
 	private int x;
 	private int y;
+	private int health;
 	
 	public ActiveObject(int x, int y){
 		this.velocity = 0;
 		this.direction = Direction.NORTH;
 		this.x = x;
 		this.y = y;
+		health = -1;
 	}
 	
 	public void setDirection(Direction direction) {
@@ -65,5 +67,13 @@ public class ActiveObject {
 	public void removeChild(ActiveObject object){
 		
 	}
-	
+	public void registerHit() {
+		
+	}
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	public int getHealth() {
+		return health;
+	}
 }
