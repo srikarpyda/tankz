@@ -55,7 +55,7 @@ public class Shell extends ActiveObject {
 				setX(nextX);
 				setY(nextY);
 			}else {
-				//remove it from the parent
+				parent.removeChild(this);
 			}
 		}
 	}	

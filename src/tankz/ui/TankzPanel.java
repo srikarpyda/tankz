@@ -69,6 +69,10 @@ public class TankzPanel extends Panel {
 			ActiveObject a = (ActiveObject) i.next();
 			if(a.getImage() != null){
 				g2.drawImage(a.getImage(),a.getX(),a.getY(),null);
+				for (int j = 0; j < a.getChildren().size(); j++) {
+					ActiveObject child = a.getChildren().get(j);
+					g2.drawImage(child.getImage(),child.getX(),child.getY(),null);
+				}
 			}
 		}		
 	}
