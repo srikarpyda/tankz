@@ -35,5 +35,8 @@ public class TankzTile {
 	public int getY() {
 		return y;
 	}
+	public String toString() {
+		return "X: " + x + " Y: " + y;
+	}
 	
 }

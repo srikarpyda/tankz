@@ -3,6 +3,8 @@ package tankz.core;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Vector;
 
 import tankz.ui.TankzGameUI;
@@ -12,6 +14,7 @@ public class TankzEngine extends Thread implements KeyListener{
 	public static TankzGameUI ui;
 	public static TankzGrid grid;
 	public static Vector<ActiveObject> active;
+	public static LinkedList<ActiveObject> spawnQueue;
 	private boolean isRunning = true;
 	private boolean isPaused = false;
 	
@@ -26,7 +29,9 @@ public class TankzEngine extends Thread implements KeyListener{
 		grid = new TankzGrid(9);
 		this.setupGrid();
 		active = new Vector<ActiveObject>();
-		active.add(new Tank(20*8, 20*8));
+		spawnQueue = new LinkedList<ActiveObject>();
+		spawnQueue.add(new Tank());
+		spawnQueue.add(new Tank());
 		ui = new TankzGameUI();
 		ui.addKeyListener(this);
 	}
@@ -34,10 +39,22 @@ public class TankzEngine extends Thread implements KeyListener{
 	public TankzEngine(File file){
 		//TODO generate code for this
 	}
-	
+	public void spawn() {
+		if(spawnQueue.size() != 0) {
+			for (int i = 0; i < spawnQueue.size(); i++) {
+				ActiveObject a = spawnQueue.pop();
+				TankzTile spawnPoint = grid.getSpawnPoint();
+				a.setX(spawnPoint.getX());
+				a.setY(spawnPoint.getY());
+				active.add(a);
+			}
+			
+		}
+	}
 	public void run() {
 		while(isRunning){
 			while(!isPaused){
+				spawn();
 				boolean repaint = true;
 				if(repaint) {
 					ui.repaintGame();
@@ -79,9 +96,13 @@ public class TankzEngine extends Thread implements KeyListener{
 			}
 		}
 		grid.setState(0, 0, TankzTileState.TANK_START);
+		System.out.println(grid.getTile(0, 0).toString());
 		grid.setState(0, 8, TankzTileState.TANK_START);
+		System.out.println(grid.getTile(0, 8).toString());
 		grid.setState(8, 0, TankzTileState.TANK_START);
+		System.out.println(grid.getTile(8, 0).toString());
 		grid.setState(8, 8, TankzTileState.TANK_START);
+		System.out.println(grid.getTile(8, 8).toString());
 		grid.setState(4, 4, TankzTileState.POWERUP);
 	}
 
