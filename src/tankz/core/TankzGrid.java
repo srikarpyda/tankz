@@ -53,8 +53,8 @@ public class TankzGrid {
 	
 	public void setState(int x, int y, TankzTileState state){
 		if(grid.get(x).get(y).getState() == TankzTileState.TANK_START) {
-			for (Iterator i = spawnPoints.iterator(); i.hasNext();) {
-				TankzTile tile = (TankzTile) i.next();
+			for (Iterator<TankzTile> i = spawnPoints.iterator(); i.hasNext();) {
+				TankzTile tile = i.next();
 				if(tile.getX()==x && tile.getY()==y) {
 					spawnPoints.remove(tile);
 				}

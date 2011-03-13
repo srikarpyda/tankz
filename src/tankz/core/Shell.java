@@ -10,7 +10,7 @@ public class Shell extends ActiveObject {
 
 	private Image shell;
 	private ActiveObject parent;
-	
+
 	public Shell(int x, int y, ActiveObject parent) {
 		super(x, y);
 		this.parent = parent;
@@ -21,34 +21,56 @@ public class Shell extends ActiveObject {
 			System.exit(1);
 		}
 	}
-	
+
 	public Image getImage() {
 		return shell;
 	}
-	
+
 	public void action(){
+		int nextX,nextY;
 		if(this.getVelocity() > 0){
 			switch (this.getDirection()){
 			case NORTH:
-				this.setY(this.getY()-this.getVelocity());
+				nextY = this.getY()-this.getVelocity();
+				nextX = this.getX();				
 				break;
 			case EAST:
-				this.setX(this.getX()+this.getVelocity());
+				nextX = this.getX()+this.getVelocity();
+				nextY = this.getY();
 				break;
 			case SOUTH:
-				this.setY(this.getY()+this.getVelocity());
+				nextY = this.getY()+this.getVelocity();
+				nextX = this.getX();
 				break;
 			case WEST:
-				this.setX(this.getX()-this.getVelocity());
+				nextX = this.getX()-this.getVelocity();
+				nextY = this.getY();
 				break;
 			default:
+				nextX = this.getX();
+				nextY = this.getY();
 				break;
+			}
+			if(canMove(new Point(nextX+8, nextY+8))) {
+				setX(nextX);
+				setY(nextY);
+			}else {
+				//remove it from the parent
 			}
 		}
 	}	
-	
+
 	public ActiveObject getParent(){
 		return this.parent;
 	}
-
+	public boolean canMove(Point p1) {
+		try{
+			if(p1.getGridState() != TankzTileState.BLOCKED) {
+				return true;
+			}
+		}catch (ArrayIndexOutOfBoundsException e) {
+			return false;
+		}
+		return false;
+	}
 }
