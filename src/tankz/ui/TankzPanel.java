@@ -63,9 +63,10 @@ public class TankzPanel extends Panel {
 	private void paintOverlayLayer(Graphics2D g2) {
 		g2.setColor(Color.CYAN);
 		g2.drawString("P1: " + TankzEngine.playerObjects.get(0).getHealth(), 0, 195);
-		//g2.drawString("Score: " + TankzEngine.playerObjects.get(0).get(), 0, 195);
+		g2.drawString("Score: " + TankzEngine.playerObjects.get(0).getScore(), 0, 215);
 		g2.setColor(Color.RED);
 		g2.drawString("P2: " + TankzEngine.playerObjects.get(1).getHealth(), 150, 195);
+		g2.drawString("Score: " + TankzEngine.playerObjects.get(1).getScore(), 133, 215);
 	}
 
 	private void paintActiveLayer(Graphics2D g2) {
