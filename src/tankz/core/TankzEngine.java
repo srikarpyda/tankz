@@ -89,6 +89,9 @@ public class TankzEngine extends Thread implements KeyListener{
 	private void iterateLogic() {
 		for(ActiveObject object : active){
 			object.action();
+			for (int i = 0; i < object.getChildren().size(); i++) {
+				object.getChildren().get(i).action();
+			}
 		}
 	}
 
