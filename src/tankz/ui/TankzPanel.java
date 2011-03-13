@@ -94,5 +94,7 @@ public class TankzPanel extends Panel {
 				}
 			}
 		}
+		g2.setColor(Color.BLACK);
+		g2.fillRect(0, 180, 180,200);
 	}
 }
