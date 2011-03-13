@@ -15,7 +15,7 @@ public class TankzGameUI extends JFrame {
 		super("Tankz");
 		
 		pane = new TankzPanel();
-		pane.setPreferredSize(new Dimension(TankzEngine.grid.getGridSize()*20,TankzEngine.grid.getGridSize()*20));
+		pane.setPreferredSize(new Dimension(TankzEngine.grid.getGridSize()*20,(TankzEngine.grid.getGridSize()*20)+40));
 		add(pane);
 		setResizable(false);
 		
