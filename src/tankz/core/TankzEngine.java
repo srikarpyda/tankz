@@ -59,9 +59,11 @@ public class TankzEngine extends Thread implements KeyListener{
 				TankzTile spawnPoint = grid.getSpawnPoint();
 				a.setX(spawnPoint.getX());
 				a.setY(spawnPoint.getY());
-				getActive().add(a);
+				a.resetHealth();
+				if(!getActive().contains(a)){
+					getActive().add(a);
+				}
 			}
-
 		}
 	}
 	public void run() {
@@ -95,9 +97,8 @@ public class TankzEngine extends Thread implements KeyListener{
 
 	private void iterateLogic() {
 			for(ActiveObject object : getActive()){
-				if(object.getHealth()==0) {
+				if(object.getHealth()== 0) {
 					System.out.println("Deaded");
-					getActive().remove(object);
 					spawnQueue.add(object);
 				}else {
 					object.action();
