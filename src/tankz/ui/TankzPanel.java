@@ -1,5 +1,6 @@
 package tankz.ui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -26,8 +27,8 @@ public class TankzPanel extends Panel {
 	
 	public TankzPanel() {
 		block = null;
-		buffer1 = new BufferedImage(TankzEngine.grid.getGridSize()*20, TankzEngine.grid.getGridSize()*20, BufferedImage.TYPE_INT_RGB);
-		buffer2 = new BufferedImage(TankzEngine.grid.getGridSize()*20, TankzEngine.grid.getGridSize()*20, BufferedImage.TYPE_INT_RGB);
+		buffer1 = new BufferedImage(TankzEngine.grid.getGridSize()*20, (TankzEngine.grid.getGridSize()*20)+40, BufferedImage.TYPE_INT_RGB);
+		buffer2 = new BufferedImage(TankzEngine.grid.getGridSize()*20, (TankzEngine.grid.getGridSize()*20)+40, BufferedImage.TYPE_INT_RGB);
 		try {
 			block = ImageIO.read(new File("images/block.png"));
 			empty = ImageIO.read(new File("images/empty.png"));
@@ -60,8 +61,11 @@ public class TankzPanel extends Panel {
 		
 	}
 	private void paintOverlayLayer(Graphics2D g2) {
-		// TODO Auto-generated method stub
-		
+		g2.setColor(Color.CYAN);
+		g2.drawString("P1: " + TankzEngine.playerObjects.get(0).getHealth(), 0, 195);
+		//g2.drawString("Score: " + TankzEngine.playerObjects.get(0).get(), 0, 195);
+		g2.setColor(Color.RED);
+		g2.drawString("P2: " + TankzEngine.playerObjects.get(1).getHealth(), 150, 195);
 	}
 
 	private void paintActiveLayer(Graphics2D g2) {
