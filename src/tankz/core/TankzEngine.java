@@ -73,13 +73,7 @@ public class TankzEngine extends Thread implements KeyListener{
 				repaint = true;
 			}
 			if(!isPaused){
-				spawn();
-				if(repaint) {
-					ui.repaintGame();
-					repaint = false;
-				}else {
-					repaint = true;
-				}				
+				spawn();			
 				iterateLogic();				
 			}
 			try {
