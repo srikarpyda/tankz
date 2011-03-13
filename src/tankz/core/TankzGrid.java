@@ -76,7 +76,7 @@ public class TankzGrid {
 	}
 
 	public TankzTile getSpawnPoint() {		
-		if(spawnCounter >= spawnPoints.size()) {
+		if(spawnCounter == spawnPoints.size()-1) {
 			spawnCounter = 0;
 		}else {
 			spawnCounter++;

@@ -79,4 +79,7 @@ public class ActiveObject {
 	public void fire(){
 		
 	}
+	public void resetHealth() {
+		
+	}
 }

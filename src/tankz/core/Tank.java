@@ -159,4 +159,7 @@ public class Tank extends ActiveObject {
 		shell.setVelocity((float) 2);
 		
 	}
+public void resetHealth() {
+	 this.setHealth(5);	
+	}
 }
