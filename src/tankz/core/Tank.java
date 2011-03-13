@@ -3,6 +3,7 @@ package tankz.core;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 
@@ -12,6 +13,7 @@ public class Tank extends ActiveObject {
 	private Image tank_east;
 	private Image tank_south;
 	private Image tank_west;
+	private Vector<ActiveObject> bullets = new Vector<ActiveObject>();
 
 	public Tank(int x, int y){
 		super(x, y);
@@ -109,6 +111,18 @@ public class Tank extends ActiveObject {
 			return false;
 		}
 		return false;
+	}
+	
+	public void addChild(ActiveObject shell){
+		this.bullets.add(shell);
+	}
+	
+	public void removeChild(ActiveObject shell){
+		this.bullets.remove(shell);
+	}
+	
+	public Vector<ActiveObject> getChildren(){
+		return (Vector<ActiveObject>)bullets;
 	}
 	
 }
