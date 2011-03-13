@@ -202,10 +202,7 @@ public class Tank extends ActiveObject {
 		stopTank(key);
 	}
 	
-	private void stopTank(KeyEvent e) {
-		if(numOfKeys() < 1) {
-			this.setVelocity(0);
-		}	
+	private void stopTank(KeyEvent e) {	
 		if(e.getKeyCode()==this.north){					
 			upButtonPressed = false;
 		}else if(e.getKeyCode()==this.west){
@@ -214,6 +211,9 @@ public class Tank extends ActiveObject {
 			rightButtonPressed = false;
 		}else if(e.getKeyCode()==this.south){
 			downButtonPressed = false;
+		}
+		if(numOfKeys() < 1) {
+			this.setVelocity(0);
 		}
 	}
 	
