@@ -21,7 +21,12 @@ public class TankzEngine extends Thread implements KeyListener{
 	private boolean upButtonPressed = false; 
 	private boolean downButtonPressed = false; 
 	private boolean leftButtonPressed = false; 
-	private boolean rightButtonPressed = false; 
+	private boolean rightButtonPressed = false;
+	
+	private boolean wButtonPressed = false; 
+	private boolean sButtonPressed = false; 
+	private boolean aButtonPressed = false; 
+	private boolean dButtonPressed = false; 
 
 
 	public TankzEngine() {
@@ -119,7 +124,11 @@ public class TankzEngine extends Thread implements KeyListener{
 			if(!isPaused){
 				moveTank(arg0);
 			}
-		}else if(arg0.getKeyCode()==KeyEvent.VK_SPACE){
+		}else if(arg0.getKeyCode()==KeyEvent.VK_W || arg0.getKeyCode()==KeyEvent.VK_A || arg0.getKeyCode()==KeyEvent.VK_D || arg0.getKeyCode()==KeyEvent.VK_S){
+			if(!isPaused){
+				moveTank(arg0);
+			}
+		}else if(arg0.getKeyCode()==KeyEvent.VK_CONTROL){
 			if(!isPaused) {
 				Shell shell = null;
 				switch (active.get(0).getDirection()){
@@ -141,6 +150,29 @@ public class TankzEngine extends Thread implements KeyListener{
 				active.get(0).addChild(shell);
 				shell.setDirection(active.get(0).getDirection());
 				shell.setVelocity((float) 2);
+			}	
+		}else if(arg0.getKeyCode()==KeyEvent.VK_SPACE){
+			if(!isPaused) {
+				Shell shell = null;
+				switch (active.get(1).getDirection()){
+				case NORTH:
+					shell = new Shell(active.get(1).getX(),active.get(1).getY()-8, active.get(1));
+					break;
+				case EAST:
+					shell = new Shell(active.get(1).getX()+8,active.get(1).getY(), active.get(1));
+					break;
+				case SOUTH:
+					shell = new Shell(active.get(1).getX(),active.get(1).getY()+8, active.get(1));
+					break;
+				case WEST:
+					shell = new Shell(active.get(1).getX()-8,active.get(1).getY(), active.get(1));
+					break;
+				default:
+					break;
+				}
+				active.get(1).addChild(shell);
+				shell.setDirection(active.get(1).getDirection());
+				shell.setVelocity((float) 2);
 			}
 		}else if(arg0.getKeyCode()==KeyEvent.VK_ESCAPE){
 			togglePaused();
@@ -153,44 +185,81 @@ public class TankzEngine extends Thread implements KeyListener{
 		if(e.getKeyCode()==KeyEvent.VK_UP){
 			upButtonPressed = true;
 			active.get(0).setDirection(Direction.NORTH);
+			active.get(0).setVelocity((float) 1);
 		}else if(e.getKeyCode()==KeyEvent.VK_LEFT){
 			leftButtonPressed = true;
 			active.get(0).setDirection(Direction.WEST);
+			active.get(0).setVelocity((float) 1);
 		}else if(e.getKeyCode()==KeyEvent.VK_RIGHT){
 			rightButtonPressed = true;
 			active.get(0).setDirection(Direction.EAST);
+			active.get(0).setVelocity((float) 1);
 		}else if(e.getKeyCode()==KeyEvent.VK_DOWN){
 			downButtonPressed = true;
 			active.get(0).setDirection(Direction.SOUTH);
+			active.get(0).setVelocity((float) 1);
+		}else if(e.getKeyCode()==KeyEvent.VK_W){
+			wButtonPressed = true;
+			active.get(1).setDirection(Direction.NORTH);
+			active.get(1).setVelocity((float) 1);
+		}else if(e.getKeyCode()==KeyEvent.VK_A){
+			aButtonPressed = true;
+			active.get(1).setDirection(Direction.WEST);
+			active.get(1).setVelocity((float) 1);
+		}else if(e.getKeyCode()==KeyEvent.VK_S){
+			sButtonPressed = true;
+			active.get(1).setDirection(Direction.SOUTH);
+			active.get(1).setVelocity((float) 1);
+		}else if(e.getKeyCode()==KeyEvent.VK_D){
+			dButtonPressed = true;
+			active.get(1).setDirection(Direction.EAST);
+			active.get(1).setVelocity((float) 1);
 		}
-		active.get(0).setVelocity((float) 1);
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		if(arg0.getKeyCode()==KeyEvent.VK_UP || arg0.getKeyCode()==KeyEvent.VK_LEFT || arg0.getKeyCode()==KeyEvent.VK_RIGHT || arg0.getKeyCode()==KeyEvent.VK_DOWN){
-			stopTank(arg0);
+			stopTank(arg0, active.get(0));
+		}else if(arg0.getKeyCode()==KeyEvent.VK_W || arg0.getKeyCode()==KeyEvent.VK_A || arg0.getKeyCode()==KeyEvent.VK_D || arg0.getKeyCode()==KeyEvent.VK_S){
+			stopTank(arg0, active.get(1));
 		}
 	}
-	private int numOfKeys() {
+	private int numOfKeys(ActiveObject object) {
 		int r = 0;
-		if(upButtonPressed){
-			r++;
-		}
-		if(downButtonPressed) {
-			r++;
-		}
-		if(leftButtonPressed) {
-			r++;
-		}
-		if(rightButtonPressed) {
-			r++;
+		if(object==active.get(0)){
+			if(upButtonPressed){
+				r++;
+			}
+			if(downButtonPressed) {
+				r++;
+			}
+			if(leftButtonPressed) {
+				r++;
+			}
+			if(rightButtonPressed) {
+				r++;
+			}
+		}else if(object==active.get(1)){
+			if(wButtonPressed){
+				r++;
+			}
+			if(sButtonPressed) {
+				r++;
+			}
+			if(aButtonPressed) {
+				r++;
+			}
+			if(dButtonPressed) {
+				r++;
+			}
 		}
 		return r;
 	}
-	private void stopTank(KeyEvent e) {
-		if(numOfKeys() == 1) {
-			active.get(0).setVelocity(0);
+	private void stopTank(KeyEvent e, ActiveObject object) {
+		if(numOfKeys(object) == 1) {
+			object.setVelocity(0);
 		}	
 		if(e.getKeyCode()==KeyEvent.VK_UP){					
 			upButtonPressed = false;
@@ -200,7 +269,15 @@ public class TankzEngine extends Thread implements KeyListener{
 			rightButtonPressed = false;
 		}else if(e.getKeyCode()==KeyEvent.VK_DOWN){
 			downButtonPressed = false;
-		}	
+		}else if(e.getKeyCode()==KeyEvent.VK_W){
+			wButtonPressed = false;
+		}else if(e.getKeyCode()==KeyEvent.VK_A){
+			aButtonPressed = false;
+		}else if(e.getKeyCode()==KeyEvent.VK_S){
+			sButtonPressed = false;
+		}else if(e.getKeyCode()==KeyEvent.VK_D){
+			dButtonPressed = false;
+		}
 	}
 	@Override
 	public void keyTyped(KeyEvent arg0) {}
