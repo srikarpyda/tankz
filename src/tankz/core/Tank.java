@@ -25,6 +25,18 @@ public class Tank extends ActiveObject {
 			System.exit(1);
 		}
 	}
+	public Tank() {
+		super(0,0);
+		try{
+			tank_north = ImageIO.read(new File("images/tank_north.png"));
+			tank_east = ImageIO.read(new File("images/tank_east.png"));
+			tank_south = ImageIO.read(new File("images/tank_south.png"));
+			tank_west = ImageIO.read(new File("images/tank_west.png"));
+		}catch(IOException e){
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
 	public Image getImage() {
 		switch (this.getDirection()){
 		case NORTH:
