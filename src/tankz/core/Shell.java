@@ -71,7 +71,7 @@ public class Shell extends ActiveObject {
 				if(p.getY() > o.getY() && p.getY() < o.getY()+16) {
 					System.out.println("Object Hit");
 					System.out.println(o.getHealth());
-					o.registerHit();
+					o.registerHit(parent);
 					return true;
 				}
 			}

@@ -11,6 +11,7 @@ public class ActiveObject {
 	private int x;
 	private int y;
 	private int health;
+	private int score;
 	
 	public ActiveObject(int x, int y){
 		this.velocity = 0;
@@ -18,6 +19,7 @@ public class ActiveObject {
 		this.x = x;
 		this.y = y;
 		health = -1;
+		score = 0;
 	}
 	
 	public void setDirection(Direction direction) {
@@ -68,7 +70,7 @@ public class ActiveObject {
 	public void removeChild(ActiveObject object){
 		
 	}
-	public void registerHit() {
+	public void registerHit(ActiveObject Parent) {
 		
 	}
 	public void setHealth(int health) {
@@ -88,6 +90,15 @@ public class ActiveObject {
 		
 	}
 	public void keyReleased(KeyEvent key){
+		
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void addScore(int i) {
+		score+=i;
 		
 	}
 	

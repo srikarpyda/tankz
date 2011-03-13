@@ -14,6 +14,8 @@ public class Tank extends ActiveObject {
 	private Image tank_east;
 	private Image tank_south;
 	private Image tank_west;
+	
+	
 	private Vector<ActiveObject> bullets = new Vector<ActiveObject>();
 	private int north, south, east, west, fire;
 	private boolean upButtonPressed = false; 
@@ -143,14 +145,13 @@ public class Tank extends ActiveObject {
 	public Vector<ActiveObject> getChildren(){
 		return (Vector<ActiveObject>)bullets;
 	}
-	public void registerHit() {
+	public void registerHit(ActiveObject parent) {
 		this.setHealth(this.getHealth()-1);
 		if(this.getHealth() == 0) {
 			System.out.println("TANK DEAD");
-			
+			parent.addScore(1);
 		}
 	}
-	
 	public void fire(){
 		Shell shell = null;
 		
