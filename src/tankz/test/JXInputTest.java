@@ -11,7 +11,6 @@ public class JXInputTest{
 	public static void main(String[] args){
 		
 		System.load("C:\\Windows\\jxinput.dll");
-		System.out.println(JXInputManager.getNumberOfDevices());
 		JXInputEventManager.setTriggerIntervall( 50 );
 		for(int i = 0; i < JXInputManager.getNumberOfDevices(); i++){
 			if(JXInputManager.getJXInputDevice(i).getName().equals("Controller (XBOX 360 For Windows)")){
