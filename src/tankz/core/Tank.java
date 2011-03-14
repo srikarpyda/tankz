@@ -201,18 +201,18 @@ public class Tank extends ActiveObject {
 		}
 	}
 
-	public void keyReleased(KeyEvent key){
+	public void keyReleased(int key){
 		stopTank(key);
 	}
 
-	private void stopTank(KeyEvent e) {	
-		if(e.getKeyCode()==this.north){					
+	private void stopTank(int e) {	
+		if(e==this.north){					
 			upButtonPressed = false;
-		}else if(e.getKeyCode()==this.west){
+		}else if(e==this.west){
 			leftButtonPressed = false;
-		}else if(e.getKeyCode()==this.east){
+		}else if(e==this.east){
 			rightButtonPressed = false;
-		}else if(e.getKeyCode()==this.south){
+		}else if(e==this.south){
 			downButtonPressed = false;
 		}
 		if(numOfKeys() < 1) {
