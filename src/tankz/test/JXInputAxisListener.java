@@ -9,7 +9,7 @@ public class JXInputAxisListener implements JXInputAxisEventListener {
 
 	public JXInputAxisListener( Axis axis )
 	{
-		JXInputEventManager.addListener( this, axis, 0.1 );
+		JXInputEventManager.addListener( this, axis, 0.75 );
 	}
 
 	
