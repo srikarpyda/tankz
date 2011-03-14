@@ -45,13 +45,20 @@ public class TankzEngine extends Thread implements KeyListener{
 		if(spawnQueue.size() != 0) {
 			for (int i = 0; i < spawnQueue.size(); i++) {
 				ActiveObject a = spawnQueue.pop();
-				TankzTile spawnPoint = grid.getSpawnPoint();
-				a.setX(spawnPoint.getX());
-				a.setY(spawnPoint.getY());
-				a.resetHealth();
-				if(!getActive().contains(a)){
-					getActive().add(a);
-				}
+				if(a.getSpawnCounter() == 0) {
+					TankzTile spawnPoint = grid.getSpawnPoint();
+					a.setX(spawnPoint.getX());
+					a.setY(spawnPoint.getY());
+					a.resetHealth();
+					if(!getActive().contains(a)){
+						getActive().add(a);
+					}
+					a.setRenderState(true);
+				}else {
+					System.out.println(a.getSpawnCounter());
+					a.setSpawnCounter(a.getSpawnCounter()-1);
+					spawnQueue.add(a);
+				}				
 			}
 		}
 	}
@@ -86,10 +93,14 @@ public class TankzEngine extends Thread implements KeyListener{
 
 	private void iterateLogic() {
 			for(ActiveObject object : getActive()){
-				if(object.getHealth()== 0) {
+				if(object.getHealth()== 0 && object.getRenderState() == true) {
 					System.out.println("Deaded");
+					object.setRenderState(false);
+					object.setX(-20);
+					object.setY(-20);
+					object.setSpawnCounter(20);
 					spawnQueue.add(object);
-				}else {
+				}else if(object.getRenderState() == true) {
 					object.action();
 				}
 				for (int i = 0; i < object.getChildren().size(); i++) {
