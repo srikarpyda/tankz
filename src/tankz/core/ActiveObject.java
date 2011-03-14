@@ -12,7 +12,25 @@ public class ActiveObject {
 	private int y;
 	private int health;
 	private int score;
+	private int spawnCounter;
+	private boolean renderState;
 	
+	public boolean getRenderState() {
+		return renderState;
+	}
+
+	public void setRenderState(boolean getRenderState) {
+		this.renderState = getRenderState;
+	}
+
+	public int getSpawnCounter() {
+		return spawnCounter;
+	}
+
+	public void setSpawnCounter(int spawnCounter) {
+		this.spawnCounter = spawnCounter;
+	}
+
 	public ActiveObject(int x, int y){
 		this.velocity = 0;
 		this.direction = Direction.NORTH;
@@ -20,6 +38,7 @@ public class ActiveObject {
 		this.y = y;
 		health = -1;
 		score = 0;
+		renderState = true;
 	}
 	
 	public void setDirection(Direction direction) {

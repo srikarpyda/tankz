@@ -14,8 +14,8 @@ public class Tank extends ActiveObject {
 	private Image tank_east;
 	private Image tank_south;
 	private Image tank_west;
-	
-	
+
+
 	private Vector<ActiveObject> bullets = new Vector<ActiveObject>();
 	private int north, south, east, west, fire;
 	private boolean upButtonPressed = false; 
@@ -61,19 +61,21 @@ public class Tank extends ActiveObject {
 		}
 	}
 	public Image getImage() {
-		switch (this.getDirection()){
-		case NORTH:
-			return tank_north;
-		case EAST:
-			return tank_east;
-		case SOUTH:
-			return tank_south;
-		case WEST:
-			return tank_west;
-		default:
-			return null;
+		if(getRenderState()){
+			switch (this.getDirection()){
+			case NORTH:
+				return tank_north;
+			case EAST:
+				return tank_east;
+			case SOUTH:
+				return tank_south;
+			case WEST:
+				return tank_west;
+			default:
+				return null;
+			}
 		}
-
+		return null;
 	}	
 	public void action(){
 		int nextX,nextY;
@@ -154,7 +156,7 @@ public class Tank extends ActiveObject {
 	}
 	public void fire(){
 		Shell shell = null;
-		
+
 		switch (this.getDirection()){
 		case NORTH:
 			shell = new Shell(this.getX(),this.getY()-8, this);
@@ -174,9 +176,9 @@ public class Tank extends ActiveObject {
 		this.addChild(shell);
 		shell.setDirection(this.getDirection());
 		shell.setVelocity((float) 2);
-		
+
 	}
-	
+
 	public void keyPressed(KeyEvent key){
 		if(key.getKeyCode()==this.north){
 			upButtonPressed = true;
@@ -198,11 +200,11 @@ public class Tank extends ActiveObject {
 			this.fire();
 		}
 	}
-	
+
 	public void keyReleased(KeyEvent key){
 		stopTank(key);
 	}
-	
+
 	private void stopTank(KeyEvent e) {	
 		if(e.getKeyCode()==this.north){					
 			upButtonPressed = false;
@@ -217,7 +219,7 @@ public class Tank extends ActiveObject {
 			this.setVelocity(0);
 		}
 	}
-	
+
 	private int numOfKeys() {
 		int r = 0;
 		if(upButtonPressed){
@@ -234,7 +236,7 @@ public class Tank extends ActiveObject {
 		}
 		return r;
 	}
-public void resetHealth() {
-	 this.setHealth(5);	
+	public void resetHealth() {
+		this.setHealth(5);	
 	}
 }
