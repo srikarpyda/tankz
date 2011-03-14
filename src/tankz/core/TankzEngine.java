@@ -38,19 +38,23 @@ public class TankzEngine extends Thread implements KeyListener{
 		addPlayer(new Tank(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_SPACE));
 		ui = new TankzGameUI();
 		ui.addKeyListener(this);
-		System.load("C:\\Windows\\jxinput.dll");
-		JXInputEventManager.setTriggerIntervall( 50 );
-		for(int i = 0; i < JXInputManager.getNumberOfDevices(); i++){
-			if(JXInputManager.getJXInputDevice(i).getName().equals("Controller (XBOX 360 For Windows)")){
-				DirectInputDevice xbox = new DirectInputDevice(i);
-				for(int j = 0; j < 2; j++){
-					if(xbox.getAxis(j) != null){
-						new JXInputAxisListener(xbox.getAxis(j));
+		try{
+			System.load("C:\\Windows\\jxinput.dll");
+			JXInputEventManager.setTriggerIntervall( 50 );
+			for(int i = 0; i < JXInputManager.getNumberOfDevices(); i++){
+				if(JXInputManager.getJXInputDevice(i).getName().equals("Controller (XBOX 360 For Windows)")){
+					DirectInputDevice xbox = new DirectInputDevice(i);
+					for(int j = 0; j < 2; j++){
+						if(xbox.getAxis(j) != null){
+							new JXInputAxisListener(xbox.getAxis(j));
+						}
 					}
+					new JXInputButtonListener(xbox.getButton(0));
+					
 				}
-				new JXInputButtonListener(xbox.getButton(0));
-				
 			}
+		}catch(UnsatisfiedLinkError e){
+			System.out.println("XBox Controller Driver not installed!");
 		}
 	}
 
