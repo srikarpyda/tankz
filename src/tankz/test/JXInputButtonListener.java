@@ -1,5 +1,6 @@
 package tankz.test;
 
+import tankz.core.TankzEngine;
 import de.hardcode.jxinput.Button;
 import de.hardcode.jxinput.event.JXInputButtonEvent;
 import de.hardcode.jxinput.event.JXInputButtonEventListener;
@@ -15,7 +16,11 @@ public class JXInputButtonListener implements JXInputButtonEventListener {
 	
 	@Override
 	public void changed(JXInputButtonEvent arg0) {
-		System.out.println( "Button " + arg0.getButton().getName() + " changed : state=" + arg0.getButton().getState() );
+		if(arg0.getButton().getName().equals("Button 0")){
+			if(arg0.getButton().getState() == true){
+				TankzEngine.playerObjects.get(1).fire();
+			}
+		}
 
 	}
 

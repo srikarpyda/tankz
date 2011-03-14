@@ -102,13 +102,13 @@ public class ActiveObject {
 		
 	}
 	
-	public void keyPressed(KeyEvent key){
+	public void keyPressed(int key){
 		
 	}
 	public void resetHealth() {
 		
 	}
-	public void keyReleased(KeyEvent key){
+	public void keyReleased(int key){
 		
 	}
 
