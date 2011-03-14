@@ -6,6 +6,12 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.Vector;
 
+import de.hardcode.jxinput.JXInputManager;
+import de.hardcode.jxinput.directinput.DirectInputDevice;
+import de.hardcode.jxinput.event.JXInputEventManager;
+
+import tankz.test.JXInputAxisListener;
+import tankz.test.JXInputButtonListener;
 import tankz.ui.TankzGameUI;
 
 public class TankzEngine extends Thread implements KeyListener{
@@ -32,6 +38,20 @@ public class TankzEngine extends Thread implements KeyListener{
 		addPlayer(new Tank(KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_A, KeyEvent.VK_SPACE));
 		ui = new TankzGameUI();
 		ui.addKeyListener(this);
+		System.load("C:\\Windows\\jxinput.dll");
+		JXInputEventManager.setTriggerIntervall( 50 );
+		for(int i = 0; i < JXInputManager.getNumberOfDevices(); i++){
+			if(JXInputManager.getJXInputDevice(i).getName().equals("Controller (XBOX 360 For Windows)")){
+				DirectInputDevice xbox = new DirectInputDevice(i);
+				for(int j = 0; j < 2; j++){
+					if(xbox.getAxis(j) != null){
+						new JXInputAxisListener(xbox.getAxis(j));
+					}
+				}
+				new JXInputButtonListener(xbox.getButton(0));
+				
+			}
+		}
 	}
 
 	public TankzEngine(File file){
@@ -135,7 +155,7 @@ public class TankzEngine extends Thread implements KeyListener{
 			togglePaused();
 		}else{
 			for(ActiveObject object : playerObjects){
-				object.keyPressed(arg0);
+				object.keyPressed(arg0.getKeyCode());
 			}
 		}
 
@@ -145,7 +165,7 @@ public class TankzEngine extends Thread implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		for(ActiveObject object : playerObjects){
-			object.keyReleased(arg0);
+			object.keyReleased(arg0.getKeyCode());
 		}
 	}
 	@Override

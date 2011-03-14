@@ -126,7 +126,7 @@ public class Tank extends ActiveObject {
 	public boolean canMove(Point p1, Point p2) {
 
 		try{
-			System.out.println("P1 : " + p1.getString() + " " + p1.getGridInfo() + " P2 : " + p2.getString() + p2.getGridInfo());
+			//System.out.println("P1 : " + p1.getString() + " " + p1.getGridInfo() + " P2 : " + p2.getString() + p2.getGridInfo());
 			if(p1.getGridState() != TankzTileState.BLOCKED && p2.getGridState() != TankzTileState.BLOCKED) {
 				return true;
 			}
@@ -179,24 +179,24 @@ public class Tank extends ActiveObject {
 
 	}
 
-	public void keyPressed(KeyEvent key){
-		if(key.getKeyCode()==this.north){
+	public void keyPressed(int key){
+		if(key==this.north){
 			upButtonPressed = true;
 			this.setDirection(Direction.NORTH);
 			this.setVelocity((float) 1);
-		}else if(key.getKeyCode()==this.south){
+		}else if(key==this.south){
 			downButtonPressed = true;
 			this.setDirection(Direction.SOUTH);
 			this.setVelocity((float) 1);
-		}else if(key.getKeyCode()==this.west){
+		}else if(key==this.west){
 			leftButtonPressed = true;
 			this.setDirection(Direction.WEST);
 			this.setVelocity((float) 1);
-		}else if(key.getKeyCode()==this.east){
+		}else if(key==this.east){
 			rightButtonPressed = true;
 			this.setDirection(Direction.EAST);
 			this.setVelocity((float) 1);
-		}else if(key.getKeyCode()==this.fire){
+		}else if(key==this.fire){
 			this.fire();
 		}
 	}
